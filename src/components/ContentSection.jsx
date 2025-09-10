@@ -1,10 +1,13 @@
 import React, { useState, useRef } from 'react';
-import videoFile from '../assets/video.mp4';
-import posterImage from '../assets/poster.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const ContentSection = () => {
   const [videoDuration, setVideoDuration] = useState('Loading...');
   const videoRef = useRef(null);
+  const navigate = useNavigate();
+  const handleGetStarted = () => {
+    navigate('/calculate');
+  };
 
   // Format duration from seconds to MM:SS format
   const formatDuration = (seconds) => {
@@ -62,35 +65,20 @@ const ContentSection = () => {
             </div>
             
             {/* Video Container */}
-            <div className="relative aspect-video bg-gray-100 rounded-xl overflow-hidden shadow-lg group flex-grow">
-              {/* Local Video Player */}
-              <video 
-                ref={videoRef}
-                className="w-full h-full object-cover"
-                controls
-                preload="metadata"
-                onLoadedMetadata={handleVideoLoad}
-                poster={posterImage}
-              >
-                <source src="{videoFile}" type="video/mp4" />
-                {/* Fallback for browsers that don't support video */}
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-sky-100 to-sky-200">
-                  <div className="text-center">
-                    <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                      <svg className="w-8 h-8 text-sky-600" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
-                    </div>
-                    <p className="text-gray-700 font-medium">Your browser doesn't support video playback</p>
-                    <p className="text-sm text-gray-500 mt-1">Please update your browser</p>
-                  </div>
-                </div>
-              </video>
+             <div className="relative aspect-video bg-gray-100 rounded-xl overflow-hidden shadow-lg group flex-grow">
+              {/* YouTube Embed */}
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/8Ls0rM2j8iQ?si=f0eVPHQz_ZKR5pYc"
+                title="Rainwater Harvesting Guide"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
             </div>
-            
             {/* Video Info */}
             <div className="flex items-center justify-between text-sm text-gray-500">
-              <span>Duration: {videoDuration}</span>
+              
               <span>Step-by-step guide</span>
             </div>
           </div>
@@ -135,7 +123,7 @@ const ContentSection = () => {
         
         {/* Calculate Button */}
         <div className="text-center mt-12">
-          <button className="btn-primary text-lg px-12 py-4">
+          <button onClick={handleGetStarted} className="btn-primary text-lg px-12 py-4">
             <span className="flex items-center justify-center space-x-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 002 2v14a2 2 0 002 2z"/>
