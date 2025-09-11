@@ -77,23 +77,22 @@ function Form() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        // const response = await fetch("http://localhost:5000/api/assessments", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(formData),
-        // });
+        const response = await fetch("http://localhost:3000/api/calculate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+        });
 
-        // const result = await response.json();
-		const result = formData.name
+        const result = await response.json();
+		// const result = formData.name
 
-		dispatch(setResult(result));
+		
+
+
+        if (response.ok) {
+            dispatch(setResult(result));
             navigate("/result");
-
-
-        // if (response.ok) {
-        //     dispatch(setResult(result));
-        //     navigate("/result");
-        // }
+        }
     }
 
     const renderStep = () => {
